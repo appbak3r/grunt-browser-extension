@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "%name%",
+  "version": "%version%",
+  "description": "%description%",
+  "content_scripts": [{
+    "matches": ["http://%host%/*", "https://%host%/*"],
+    "js": ["app.min.js"],
+    "css": ["styles.css"]
+  }],
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.svg"
+  ]
+}
