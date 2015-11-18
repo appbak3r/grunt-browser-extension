@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Author</key>
+	<string>%author%</string>
 	<key>Builder Version</key>
 	<string>10601.2.7.2</string>
 	<key>CFBundleDisplayName</key>
@@ -13,19 +15,19 @@
 	<key>CFBundleShortVersionString</key>
 	<string>%version%</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>%version%</string>
 	<key>Content</key>
 	<dict>
 		<key>Scripts</key>
 		<dict>
 			<key>Start</key>
 			<array>
-				<string>app.min.js</string>
+				<string>%injectJS%</string>
 			</array>
 		</dict>
 		<key>Stylesheets</key>
 		<array>
-			<string>styles.css</string>
+			<string>%injectCSS%</string>
 		</array>
 	</dict>
 	<key>ExtensionInfoDictionaryVersion</key>

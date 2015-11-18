@@ -3,10 +3,16 @@
   "name": "%name%",
   "version": "%version%",
   "description": "%description%",
+  "author": "%author%",
+  "icons": {
+    "16": "icon16.png",
+    "64": "icon64.png",
+    "128": "icon128.png"
+  },
   "content_scripts": [{
     "matches": ["http://%host%/*", "https://%host%/*"],
-    "js": ["app.min.js"],
-    "css": ["styles.css"]
+    "js": ["%injectJS%"],
+    "css": ["%injectCSS%"]
   }],
   "web_accessible_resources": [
     "images/*.png",
