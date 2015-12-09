@@ -1,7 +1,7 @@
 {
   "name": "grunt-browser-extension",
   "description": "Grunt plugin to create any browser website extension",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/addmitriev/grunt-browser-extension",
   "author": {
     "name": "Aleksey Dmitriev",
