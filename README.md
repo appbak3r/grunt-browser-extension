@@ -1,5 +1,6 @@
 # grunt-browser-extension
 [![npm version](https://badge.fury.io/js/grunt-browser-extension.svg)](https://badge.fury.io/js/grunt-browser-extension)
+[![Build Status](https://travis-ci.org/addmitriev/grunt-browser-extension.svg?branch=master)](https://travis-ci.org/addmitriev/grunt-browser-extension)
 > Grunt plugin to create any browser website extension
 
 ## Getting Started
