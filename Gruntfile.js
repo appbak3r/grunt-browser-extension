@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         jshint: {
             all: [
                 'Gruntfile.js',
-                'tasks/*.js',
+                'tasks/**/*.js',
                 '<%= nodeunit.tests %>'
             ],
             options: {
@@ -25,7 +25,7 @@ module.exports = function (grunt) {
 
         // Before generating any new files, remove any previously-created files.
         clean: {
-            tests: ['tmp']
+            tests: ['tmp', 'build']
         },
 
         // Configuration to be run (and then tested).
@@ -42,15 +42,16 @@ module.exports = function (grunt) {
                     },
                     files: {
                         inject: {
-                            directory: 'application',
+                            directory: 'test/fixtures/application',
                             javascripts: ['app.min.js', 'extension.js'],
                             stylesheets: ['styles.css', 'module.css']
                         },
-                        icon: 'application/icon.png'
+                        icon: 'test/fixtures/application/icon.png'
                     }
                 }
             }
         },
+
 
         // Unit tests.
         nodeunit: {
@@ -66,6 +67,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
+
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
