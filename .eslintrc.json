@@ -1,0 +1,63 @@
+{
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "script",
+        "ecmaFeatures": {
+            "globalReturn": false
+        }
+    },
+    "rules": {
+        "semi": ["error", "always"],
+        "eqeqeq": "error",
+        "curly": "error",
+        "indent": ["error", 4],
+        "strict": ["error", "global"],
+        "no-cond-assign": ["error", "always"],
+        "linebreak-style": ["error", "unix"],
+        "array-callback-return": "error",
+        "block-scoped-var": "error",
+        "complexity": "error",
+        "consistent-return": "error",
+        "default-case": "error",
+        "dot-location": "error",
+        "dot-notation": "error",
+        "guard-for-in": "error",
+        "no-caller": "error",
+        "no-case-declarations": "error",
+        "no-eq-null": "error",
+        "no-eval": "error",
+        "no-extend-native": "error",
+        "no-native-reassign": "error",
+        "no-extra-label": "error",
+        "no-loop-func": "error",
+        "no-empty-pattern": "error",
+        "no-multi-spaces": "error",
+        "no-multiple-empty-lines": ["error", {
+            "max": 2
+        }],
+        "no-redeclare": "error",
+        "no-self-assign": "error",
+        "no-unused-labels": "error",
+        "no-empty-function": "error",
+        "no-extra-semi": "error",
+        "no-func-assign": "error",
+        "no-obj-calls": "error",
+        "no-irregular-whitespace": "error",
+        "use-isnan": "error",
+        "no-inner-declarations": "error",
+        "valid-jsdoc": "error",
+        "valid-typeof": "error",
+        "no-unused-vars": "warn",
+        "no-control-regex": "warn",
+        "no-console": "off",
+        "no-extra-parens": "off"
+    },
+    "globals": {},
+    "env": {
+        "node": true
+    },
+    "plugins": [
+        "json"
+    ]
+}
