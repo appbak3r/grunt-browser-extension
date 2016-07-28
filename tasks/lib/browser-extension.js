@@ -155,7 +155,13 @@ browserExtension.prototype.build = function () {
 
     var currentDir = shell.pwd();
     shell.cd('build/firefox/');
-    shell.exec('jpm xpi', {silent: true});
+    var result = shell.exec('jpm xpi', {silent: false});
+    if(result.code !== 0){
+        result = shell.exec('../../node_modules/.bin/jpm xpi', {silent: false});
+        if(result.code !== 0){
+            grunt.fail.fatal('Can not run jpm for build xpi for Firefox');
+        }
+    }
     shell.cd(currentDir);
 
     /**
