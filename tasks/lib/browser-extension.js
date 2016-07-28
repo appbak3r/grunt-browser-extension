@@ -86,7 +86,7 @@ browserExtension.prototype.copyUserFiles = function () {
 
     this._copyFiles(applicationDir, jsFiles);
     this._copyFiles(applicationDir, cssFiles);
-    this._makeIcons(icon);
+    this._makeIcons(applicationDir,icon);
 
 };
 
@@ -107,11 +107,11 @@ browserExtension.prototype._copyFiles = function (applicationDir, files) {
     });
 };
 
-browserExtension.prototype._makeIcons = function (icon) {
+browserExtension.prototype._makeIcons = function (applicationDir, icon) {
     var identifyArgs = ['identify',
         '-format',
         "'{ \"height\": %h, \"width\": %w}'",
-        icon
+        applicationDir + '/' + icon
     ].join(' ');
 
     var raw = shell.exec(identifyArgs, {silent: true}).output;
@@ -125,13 +125,13 @@ browserExtension.prototype._makeIcons = function (icon) {
     var sizes = [16, 48, 64, 128];
 
     fs.mkdir('build/icons');
-    shell.cp(icon, 'build/icons/icon.png');
+    shell.cp(applicationDir + '/' + icon, 'build/icons/icon.png');
 
     sizes.forEach(function (size) {
 
         var resizeArgs = [
             'convert',
-            icon,
+            applicationDir + '/' + icon,
             '-resize',
             size + 'x' + size,
             'build/icons/icon' + size + '.png'

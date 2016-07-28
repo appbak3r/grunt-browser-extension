@@ -46,7 +46,7 @@ module.exports = function (grunt) {
                             javascripts: ['app.min.js', 'extension.js'],
                             stylesheets: ['styles.css', 'module.css']
                         },
-                        icon: 'test/fixtures/application/icon.png'
+                        icon: 'icon.png'
                     }
                 }
             }
