@@ -8,10 +8,21 @@
 
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
+        eslint: {
+            options: {
+                configFile: '.eslintrc.json',
+                ignores: '.eslintignore'
+            },
+            all: [
+                'Gruntfile.js',
+                'tasks/**/*.js',
+                '<%= nodeunit.tests %>'
+            ]
+        },
         jshint: {
             all: [
                 'Gruntfile.js',
@@ -65,6 +76,7 @@ module.exports = function (grunt) {
 
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
@@ -74,7 +86,7 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['clean', 'browser_extension', 'nodeunit']);
 
     // By default, lint and run all tests.
-    grunt.registerTask('default', ['jshint', 'test']);
+    grunt.registerTask('default', ['jshint', 'eslint', 'test']);
 
 
 };
