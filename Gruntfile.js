@@ -5,11 +5,10 @@
  * Copyright (c) 2015 Aleksey Dmitriev
  * Licensed under the MIT license.
  */
-
 'use strict';
 
-module.exports = function(grunt) {
 
+module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         eslint: {
@@ -33,12 +32,10 @@ module.exports = function(grunt) {
                 jshintrc: '.jshintrc'
             }
         },
-
         // Before generating any new files, remove any previously-created files.
         clean: {
             tests: ['tmp', 'build']
         },
-
         // Configuration to be run (and then tested).
         browser_extension: {
             default: {
@@ -62,18 +59,13 @@ module.exports = function(grunt) {
                 }
             }
         },
-
-
         // Unit tests.
         nodeunit: {
             tests: ['test/*_test.js']
         }
-
     });
-
     // Actually load this plugin's task(s).
     grunt.loadTasks('tasks');
-
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-eslint');
@@ -87,6 +79,4 @@ module.exports = function(grunt) {
 
     // By default, lint and run all tests.
     grunt.registerTask('default', ['jshint', 'eslint', 'test']);
-
-
 };
