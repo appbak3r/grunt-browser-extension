@@ -14,7 +14,7 @@
         "indent": ["error", 4],
         "strict": ["error", "global"],
         "no-cond-assign": ["error", "always"],
-        "linebreak-style": ["error", "unix"],
+        "linebreak-style": "off",
         "array-callback-return": "error",
         "block-scoped-var": "error",
         "complexity": "error",
