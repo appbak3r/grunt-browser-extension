@@ -1,7 +1,9 @@
 'use strict';
+/* TODO: review tests */
 
 var grunt = require('grunt');
 
+/* Test build extensions */
 exports.browser_extension = {
     setUp: function(done) {
         done();
