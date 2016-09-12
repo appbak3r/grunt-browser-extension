@@ -5,13 +5,23 @@
  * Copyright (c) 2015 Aleksey Dmitriev
  * Licensed under the MIT license.
  */
-
 'use strict';
 
-module.exports = function (grunt) {
 
+module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
+        eslint: {
+            options: {
+                configFile: '.eslintrc.json',
+                ignores: '.eslintignore'
+            },
+            all: [
+                'Gruntfile.js',
+                'tasks/**/*.js',
+                '<%= nodeunit.tests %>'
+            ]
+        },
         jshint: {
             all: [
                 'Gruntfile.js',
@@ -22,12 +32,10 @@ module.exports = function (grunt) {
                 jshintrc: '.jshintrc'
             }
         },
-
         // Before generating any new files, remove any previously-created files.
         clean: {
             tests: ['tmp', 'build']
         },
-
         // Configuration to be run (and then tested).
         browser_extension: {
             default: {
@@ -46,25 +54,21 @@ module.exports = function (grunt) {
                             javascripts: ['app.min.js', 'extension.js'],
                             stylesheets: ['styles.css', 'module.css']
                         },
-                        icon: 'test/fixtures/application/icon.png'
+                        icon: 'icon.png'
                     }
                 }
             }
         },
-
-
         // Unit tests.
         nodeunit: {
             tests: ['test/*_test.js']
         }
-
     });
-
     // Actually load this plugin's task(s).
     grunt.loadTasks('tasks');
-
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
@@ -74,7 +78,5 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['clean', 'browser_extension', 'nodeunit']);
 
     // By default, lint and run all tests.
-    grunt.registerTask('default', ['jshint', 'test']);
-
-
+    grunt.registerTask('default', ['jshint', 'eslint', 'test']);
 };

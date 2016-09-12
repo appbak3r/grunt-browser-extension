@@ -4,16 +4,12 @@
 > Grunt plugin to create any browser website extension
 
 ## Getting Started
-This plugin requires Grunt `~0.4.5`, `jpm` and `imagemagick` installed on your system
+This plugin requires Grunt `~0.4.5` and `imagemagick` installed on your system
 
 To install imagemagick you can run next command (OSx):
 
 ```shell
 brew install imagemagick
-```
-
-```shell
-npm install -g jpm
 ```
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
@@ -76,5 +72,3 @@ grunt.initConfig({
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-

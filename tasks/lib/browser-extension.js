@@ -5,6 +5,7 @@
  * Copyright (c) 2015 Aleksey Dmitriev
  * Licensed under the MIT license.
  */
+'use strict';
 
 var fs = require('fs-extra');
 var path = require('path');
@@ -13,6 +14,7 @@ var shell = require('shelljs');
 var grunt;
 
 
+// Prototype for build extensions for each browser
 var browserExtension = function (root, options, files) {
     this.root = root;
     this.options = options;
@@ -25,12 +27,11 @@ var browserExtension = function (root, options, files) {
     };
 };
 
+// Method for copy files of extension with replace of values
 browserExtension.prototype.copyBrowserFiles = function () {
     var self = this;
-
     var options = this.options;
     var pluginRoot = this.root;
-
     var browserFiles = this.browserFiles;
 
     var manifestJS = {
@@ -57,10 +58,12 @@ browserExtension.prototype.copyBrowserFiles = function () {
         })()
     };
 
+    // Process each file from skeletons
     Object.keys(browserFiles).forEach(function (browser) {
         browserFiles[browser].forEach(function (filename) {
             var content = grunt.file.read(path.join(pluginRoot, 'lib', browser, filename));
 
+            // Replace option value in template file
             Object.keys(options).forEach(function (key) {
                 var re = new RegExp('%' + key + '%', "gm");
                 content = content.replace(re, options[key]);
@@ -86,7 +89,7 @@ browserExtension.prototype.copyUserFiles = function () {
 
     this._copyFiles(applicationDir, jsFiles);
     this._copyFiles(applicationDir, cssFiles);
-    this._makeIcons(icon);
+    this._makeIcons(applicationDir,icon);
 
 };
 
@@ -107,31 +110,30 @@ browserExtension.prototype._copyFiles = function (applicationDir, files) {
     });
 };
 
-browserExtension.prototype._makeIcons = function (icon) {
+browserExtension.prototype._makeIcons = function (applicationDir, icon) {
     var identifyArgs = ['identify',
         '-format',
         "'{ \"height\": %h, \"width\": %w}'",
-        icon
+        applicationDir + '/' + icon
     ].join(' ');
 
     var raw = shell.exec(identifyArgs, {silent: true}).output;
     var options = JSON.parse(raw);
     if (options.height !== 128 || options.width !== 128) {
-        grunt.log.error("Icon must be 128px x 128px");
-        grunt.log.error("Your icon is:", options.height, 'px x ', options.width, 'px');
-        return false;
+        grunt.fail.fatal("Icon must be 128px x 128px");
+        grunt.fail.fatal("Your icon is:", options.height, 'px x ', options.width, 'px');
     }
 
     var sizes = [16, 48, 64, 128];
 
     fs.mkdir('build/icons');
-    shell.cp(icon, 'build/icons/icon.png');
+    shell.cp(applicationDir + '/' + icon, 'build/icons/icon.png');
 
     sizes.forEach(function (size) {
 
         var resizeArgs = [
             'convert',
-            icon,
+            applicationDir + '/' + icon,
             '-resize',
             size + 'x' + size,
             'build/icons/icon' + size + '.png'
@@ -153,7 +155,14 @@ browserExtension.prototype.build = function () {
 
     var currentDir = shell.pwd();
     shell.cd('build/firefox/');
-    shell.exec('jpm xpi', {silent: true});
+    var result = shell.exec('jpm xpi', {silent: true});
+    if(result.code !== 0){
+        result = shell.exec('../../node_modules/.bin/jpm xpi', {silent: true});
+        if(result.code !== 0){
+            grunt.fail.warn(result.output);
+            grunt.fail.fatal('Can not run jpm for build xpi for Firefox');
+        }
+    }
     shell.cd(currentDir);
 
     /**
