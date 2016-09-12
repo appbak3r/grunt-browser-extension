@@ -35,25 +35,25 @@ browserExtension.prototype.copyBrowserFiles = function () {
 
     var manifestJS = {
         chrome: (function () {
-            return self.files.inject.javascripts.join('", "')
+            return self.files.inject.javascripts.join('", "');
         })(),
         firefox: (function () {
-            return self.files.inject.javascripts.join('"), data.url("')
+            return self.files.inject.javascripts.join('"), data.url("');
         })(),
         safari: (function () {
-            return self.files.inject.javascripts.join("</string>\n\t\t\t\t<string>")
+            return self.files.inject.javascripts.join("</string>\n\t\t\t\t<string>");
         })()
     };
 
     var manifestCSS = {
         chrome: (function () {
-            return self.files.inject.stylesheets.join('", "')
+            return self.files.inject.stylesheets.join('", "');
         })(),
         firefox: (function () {
-            return self.files.inject.stylesheets.join('"), data.url("')
+            return self.files.inject.stylesheets.join('"), data.url("');
         })(),
         safari: (function () {
-            return self.files.inject.stylesheets.join("</string>\n\t\t\t<string>")
+            return self.files.inject.stylesheets.join("</string>\n\t\t\t<string>");
         })()
     };
 
